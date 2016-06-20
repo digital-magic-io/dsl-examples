@@ -1,9 +1,8 @@
 package io.digitalmagic.example2;
 
-import io.digitalmagic.Order;
 import io.digitalmagic.OrderValuer;
 
-public class JavaOrder implements Order {
+public class Order implements io.digitalmagic.Order {
 
     public static class Builder {
         private String security;
@@ -13,16 +12,19 @@ public class JavaOrder implements Order {
         private double value;
         private Action action;
 
-        public Builder buy(int quantity, String security) {
+        public Builder buy(int quantity) {
             this.action = Action.BUY;
             this.quantity = quantity;
-            this.security = security;
             return this;
         }
 
-        public Builder sell(int quantity, String security) {
+        public Builder sell(int quantity) {
             this.action = Action.SELL;
             this.quantity = quantity;
+            return this;
+        }
+
+        public Builder sharesOf(String security) {
             this.security = security;
             return this;
         }
@@ -42,8 +44,8 @@ public class JavaOrder implements Order {
             return this;
         }
 
-        public JavaOrder build() {
-            return new JavaOrder(this);
+        public Order build() {
+            return new Order(this);
         }
     }
 
@@ -54,7 +56,7 @@ public class JavaOrder implements Order {
     private final double value;
     private final Action action;
 
-    private JavaOrder(Builder b) {
+    private Order(Builder b) {
         security = b.security;
         quantity = b.quantity;
         limitPrice = b.limitPrice;
@@ -63,12 +65,12 @@ public class JavaOrder implements Order {
         action = b.action;
     }
 
-    public static Builder buy(int quantity, String security) {
-        return new Builder().buy(quantity, security);
+    public static Builder buy(int quantity) {
+        return new Builder().buy(quantity);
     }
 
-    public static Builder sell(int quantity, String security) {
-        return new Builder().sell(quantity, security);
+    public static Builder sell(int quantity) {
+        return new Builder().sell(quantity);
     }
 
     public String getSecurity() {
