@@ -1,8 +1,16 @@
 package io.digitalmagic.example5
 
-/**
-  * Created by Sergey on 6/22/2016.
-  */
+object MarketSymbols extends Enumeration {
+  val IBM, APPLE = Value
+}
+
+object Operation extends Enumeration {
+  val BUY, SELL = Value
+}
+
+object CurrencySymbols extends Enumeration {
+  val USD, EUR = Value
+}
 
 trait Op {
   import OrderApi._
@@ -11,19 +19,6 @@ trait Op {
 }
 
 object OrderApi {
-
-  object MarketSymbols extends Enumeration {
-    val IBM, APPLE = Value
-  }
-
-  object Operation extends Enumeration {
-    val BUY, SELL = Value
-  }
-
-  object CurrencySymbols extends Enumeration {
-    val USD, EUR = Value
-  }
-
 
   implicit class IntEx(val x: Int) extends AnyVal {
     def shares(y: OfWord) = new ToShareWord(x)
