@@ -20,5 +20,5 @@ public interface Order {
     Tradeable getTradeable();
     Integer getQuantity();
     Double getLimitPrice();
-    Boolean isAllOrNone();
+    Currency getPriceCurrency();
 }

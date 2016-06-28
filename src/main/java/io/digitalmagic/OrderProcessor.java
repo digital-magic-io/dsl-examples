@@ -8,15 +8,15 @@ public class OrderProcessor {
             .append(" ")
             .append(order.getQuantity())
             .append(" ");
-        if (order.getTradeable() instanceof Order.Share || order.getTradeable() instanceof Share) {
+        if (order.getTradeable() instanceof Order.Share || order.getTradeable() instanceof Api.Share) {
             sb.append("shares of ");
         }
         sb.append(order.getTradeable().toString())
             .append(" at limit price ")
-            .append(order.getLimitPrice());
-        if (order.isAllOrNone()) {
-            sb.append(" all or none");
-        }
+            .append(order.getLimitPrice())
+            .append(" ")
+            .append(order.getPriceCurrency());
+
         System.out.println(sb);
     }
 

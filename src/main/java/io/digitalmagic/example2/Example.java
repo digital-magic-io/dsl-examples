@@ -13,8 +13,8 @@ public class Example {
 
     public static void main(String[] args) {
         process(
-            Order.buy(300).currency(Currency.EUR).atPrice(250.00).allOrNone().build(),
-            Order.sell(100).sharesOf(Share.Apple).atPrice(10.35).build()
+            Order.buy(300).currency(Currency.EUR).atPrice(250.00).of(Currency.USD).build(),
+            Order.sell(100).sharesOf(Share.Apple).atPrice(10.35).of(Currency.USD).build()
         );
     }
 }

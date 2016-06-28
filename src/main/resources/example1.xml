@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<order>
-    <action>buy</action>
-    <quantity>100</quantity>
-    <shares>Apple</shares>
-    <atPrice>10.35</atPrice>
-    <allOrNone/>
+<order action="buy">
+    <currency name="EUR" ammount="300"/>
+    <price ammount="250" currency="USD"/>
+</order>
+<order action="sell">
+    <shares name="Apple" ammount="100"/>
+    <price ammount="10.35" currency="USD"/>
 </order>

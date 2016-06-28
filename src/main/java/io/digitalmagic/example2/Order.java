@@ -7,8 +7,7 @@ public class Order implements io.digitalmagic.Order {
         private Tradeable tradeable;
         private Integer quantity;
         private Double limitPrice;
-        private Boolean allOrNone = false;
-
+        private Currency priceCurrency;
 
         public Builder buy(int quantity) {
             this.action = Action.BUY;
@@ -37,8 +36,8 @@ public class Order implements io.digitalmagic.Order {
             return this;
         }
 
-        public Builder allOrNone() {
-            this.allOrNone = true;
+        public Builder of(Currency currency) {
+            this.priceCurrency = currency;
             return this;
         }
 
@@ -51,15 +50,14 @@ public class Order implements io.digitalmagic.Order {
     private final Tradeable tradeable;
     private final Integer quantity;
     private final Double limitPrice;
-    private final Boolean allOrNone;
-
+    private final Currency priceCurrency;
 
     private Order(Builder b) {
         action = b.action;
         tradeable = b.tradeable;
         quantity = b.quantity;
         limitPrice = b.limitPrice;
-        allOrNone = b.allOrNone;
+        priceCurrency = b.priceCurrency;
     }
 
     public static Builder buy(int quantity) {
@@ -86,9 +84,7 @@ public class Order implements io.digitalmagic.Order {
         return limitPrice;
     }
 
-    public Boolean isAllOrNone() {
-        return allOrNone;
+    public Currency getPriceCurrency() {
+        return priceCurrency;
     }
-
-
 }
