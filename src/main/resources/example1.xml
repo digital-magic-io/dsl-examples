@@ -2,8 +2,7 @@
 <order>
     <action>buy</action>
     <quantity>100</quantity>
-    <security>Apple</security>
-    <atLimitPrice>12.54</atLimitPrice>
+    <shares>Apple</shares>
+    <atPrice>10.35</atPrice>
     <allOrNone/>
-    <valueAs>standard</valueAs>
 </order>

@@ -7,14 +7,16 @@ public class OrderProcessor {
             .append(order.getAction().toString().toLowerCase())
             .append(" ")
             .append(order.getQuantity())
-            .append(" '")
-            .append(order.getSecurity())
-            .append("' at limit price ")
+            .append(" ");
+        if (order.getTradeable() instanceof Order.Share || order.getTradeable() instanceof Share) {
+            sb.append("shares of ");
+        }
+        sb.append(order.getTradeable().toString())
+            .append(" at limit price ")
             .append(order.getLimitPrice());
         if (order.isAllOrNone()) {
             sb.append(" all or none");
         }
-        sb.append(" value as ").append(order.getValue());
         System.out.println(sb);
     }
 

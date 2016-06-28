@@ -2,15 +2,23 @@ package io.digitalmagic;
 
 public interface Order {
 
-    public enum Action {
-        BUY,
-        SELL
+    interface Tradeable {}
+
+    enum Share implements Tradeable {
+        Apple, IBM
     }
 
-    String getSecurity();
-    int getQuantity();
-    double getLimitPrice();
-    boolean isAllOrNone();
-    double getValue();
+    enum Currency implements Tradeable {
+        USD, EUR
+    }
+
+    enum Action {
+        BUY, SELL
+    }
+
     Action getAction();
+    Tradeable getTradeable();
+    Integer getQuantity();
+    Double getLimitPrice();
+    Boolean isAllOrNone();
 }

@@ -1,16 +1,14 @@
 package io.digitalmagic.example2;
 
-import io.digitalmagic.OrderValuer;
-
 public class Order implements io.digitalmagic.Order {
 
     public static class Builder {
-        private String security;
-        private int quantity;
-        private double limitPrice;
-        private boolean allOrNone;
-        private double value;
         private Action action;
+        private Tradeable tradeable;
+        private Integer quantity;
+        private Double limitPrice;
+        private Boolean allOrNone = false;
+
 
         public Builder buy(int quantity) {
             this.action = Action.BUY;
@@ -24,13 +22,18 @@ public class Order implements io.digitalmagic.Order {
             return this;
         }
 
-        public Builder sharesOf(String security) {
-            this.security = security;
+        public Builder sharesOf(Share share) {
+            this.tradeable = share;
             return this;
         }
 
-        public Builder atLimitPrice(double p) {
-            this.limitPrice = p;
+        public Builder currency(Currency currency) {
+            this.tradeable = currency;
+            return this;
+        }
+
+        public Builder atPrice(Double limitPrice) {
+            this.limitPrice = limitPrice;
             return this;
         }
 
@@ -39,30 +42,24 @@ public class Order implements io.digitalmagic.Order {
             return this;
         }
 
-        public Builder valueAs(OrderValuer ov) {
-            this.value = ov.valueAs(quantity, limitPrice);
-            return this;
-        }
-
         public Order build() {
             return new Order(this);
         }
     }
 
-    private final String security;
-    private final int quantity;
-    private final double limitPrice;
-    private final boolean allOrNone;
-    private final double value;
     private final Action action;
+    private final Tradeable tradeable;
+    private final Integer quantity;
+    private final Double limitPrice;
+    private final Boolean allOrNone;
+
 
     private Order(Builder b) {
-        security = b.security;
+        action = b.action;
+        tradeable = b.tradeable;
         quantity = b.quantity;
         limitPrice = b.limitPrice;
         allOrNone = b.allOrNone;
-        value = b.value;
-        action = b.action;
     }
 
     public static Builder buy(int quantity) {
@@ -73,27 +70,25 @@ public class Order implements io.digitalmagic.Order {
         return new Builder().sell(quantity);
     }
 
-    public String getSecurity() {
-        return security;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public double getLimitPrice() {
-        return limitPrice;
-    }
-
-    public boolean isAllOrNone() {
-        return allOrNone;
-    }
-
-    public double getValue() {
-        return value;
-    }
-
     public Action getAction() {
         return action;
     }
+
+    public Tradeable getTradeable() {
+        return tradeable;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public Double getLimitPrice() {
+        return limitPrice;
+    }
+
+    public Boolean isAllOrNone() {
+        return allOrNone;
+    }
+
+
 }
