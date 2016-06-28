@@ -21,13 +21,18 @@ object Api {
   case class TradeOffer(quantity: Int, tradeable: Tradeable)
   case class PriceLimit(quantity: Double, currency: Currency)
 
+  class OfWord
+  val of = new OfWord
+
+  class AtWord
+  val at = new AtWord
+
   case class Order(
     action: Action,
     quantity: Int,
     tradeable: Tradeable,
     limitPrice: Double,
-    currency: Currency,
-    all: Boolean
+    currency: Currency
   ) extends io.digitalmagic.Order {
     override def getAction: Action = action
     override def getQuantity: Integer = quantity

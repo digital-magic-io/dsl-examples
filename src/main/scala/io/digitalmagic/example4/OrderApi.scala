@@ -2,7 +2,7 @@ package io.digitalmagic.example4
 
 import io.digitalmagic.Api
 import io.digitalmagic.Api._
-import io.digitalmagic.Order.{Action, Tradeable}
+import io.digitalmagic.Order.Action
 import io.digitalmagic.Order.Action._
 
 object OrderApi {
@@ -18,24 +18,18 @@ object OrderApi {
     def shares(of: OfWord) = ShareWord(this)
   }
 
-  class OfWord
-  def of = new OfWord
-
   case class ShareWord(word: ActionWord) {
     def Apple(a: AtWord) = PriceWord(word.action, TradeOffer(word.quantity, Api.Apple))
     def IBM(a: AtWord) = PriceWord(word.action, TradeOffer(word.quantity, Api.IBM))
   }
-
-  class AtWord
-  val at = new AtWord
 
   case class PriceWord(action: Action, offer: TradeOffer) {
     def price(price: Double) = PriceLimitWord(action, offer, price)
   }
 
   case class PriceLimitWord(action: Action, offer: TradeOffer, price: Double) {
-    def USD : Order = Order(action, offer.quantity, offer.tradeable, price, Api.USD, all = false)
-    def EUR : Order = Order(action, offer.quantity, offer.tradeable, price, Api.EUR, all = false)
+    def USD : Order = Order(action, offer.quantity, offer.tradeable, price, Api.USD)
+    def EUR : Order = Order(action, offer.quantity, offer.tradeable, price, Api.EUR)
   }
 
 }

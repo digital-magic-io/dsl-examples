@@ -7,7 +7,7 @@ object OrderApi {
 
   def I = OrderApi
 
-  private def buildOrder(quantity: Int, action: Action) = Order(action, quantity = quantity, null, limitPrice = 0.0, null, all = false)
+  private def buildOrder(quantity: Int, action: Action) = Order(action, quantity = quantity, null, limitPrice = 0.0, null)
   def buy(quantity: Int): Order = buildOrder(quantity, Action.BUY)
   def sell(quantity: Int): Order = buildOrder(quantity, Action.SELL)
 
